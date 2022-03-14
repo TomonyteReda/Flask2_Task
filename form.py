@@ -10,7 +10,9 @@ class ContactForm(FlaskForm):
     address1 = StringField('Address 1', [DataRequired()])
     address2 = StringField('Address 2', [DataRequired()])
     city = StringField('City', [DataRequired()])
-    state = SelectField('State', choices=[('Vilnius', 'Vilnius'), ('Kaunas', 'Kaunas')], validators=[DataRequired()])
+    state = SelectField('State', choices=[('...', '...'), ('Vilnius', 'Vilnius'), ('Kaunas', 'Kaunas'),
+                                          ('Klaipėda', 'Klaipėda'), ('Panevėžys', 'Panevėžys')],
+                        validators=[DataRequired(), Length(min=4, message="please select State")])
     zip_code = StringField('Zip Code', [DataRequired(), Length(min=4, message="entered zip code is too short")])
-    check = BooleanField('I confirm that entered data is valid')
+    check = BooleanField('I confirm that entered data is valid', validators=[DataRequired()])
     submit = SubmitField("Submit")
